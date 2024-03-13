@@ -10,6 +10,9 @@ services:
     ports:
       - 3003:3000
     command: sh -c 'yarn install && yarn start'
+    depends_on:
+      - product-hub
+      - stock-hub
   
   product-hub:
     image: node:18
@@ -19,6 +22,8 @@ services:
     volumes:
       - ./product-hub:/app
     command: sh -c 'yarn install && yarn start'
+    depends_on:
+      - mysql
 
   stock-hub:
     image: node:18
@@ -28,6 +33,8 @@ services:
     volumes:
       - ./stock-hub:/app
     command: sh -c 'yarn install && yarn start'
+    depends_on:
+      - mysql
 
 
   rabbitmq:

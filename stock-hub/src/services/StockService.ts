@@ -11,10 +11,7 @@ export default class StockService {
     }
     
     public async getByProductId(productId: number): Promise<Stock | null> {
-        
         const stock = await this.stockRepository.getByProductId(productId);
-        
         return stock;
-        
       }
 }
