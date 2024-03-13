@@ -1168,6 +1168,13 @@ ajv@^6.10.0, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+ampq@^2019.5.11:
+  version "2019.5.11"
+  resolved "https://registry.yarnpkg.com/ampq/-/ampq-2019.5.11.tgz#91e125e53a663dfb35b6226a6f07eab3c2b9ccd4"
+  integrity sha512-sslQWukZ7rrLiO00SNJ4GxYr0itH+3X8j3l1FW69n2izdLyWP5Z4LCILpBX2ehfvq/vdnoG7WtqhPC2nOV6+Tg==
+  dependencies:
+    t3st "^2019.4.8"
+
 ansi-align@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/ansi-align/-/ansi-align-3.0.1.tgz"
@@ -4892,6 +4899,11 @@ symbol-tree@^3.2.4:
   version "3.2.4"
   resolved "https://registry.npmjs.org/symbol-tree/-/symbol-tree-3.2.4.tgz"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
+
+t3st@^2019.4.8:
+  version "2019.10.20"
+  resolved "https://registry.yarnpkg.com/t3st/-/t3st-2019.10.20.tgz#197b7398abcda2dfa9c12c742f40da1e04c2125f"
+  integrity sha512-AjMSJVuYaERt4ph161nBtbQ2cKsuHIt06dPgoFBdl0Y9NnNBt7XnxdjfJfzHgla8nnKZPqkRoEjMPDT6LhGnTQ==
 
 tar@^6.0.2, tar@^6.1.11, tar@^6.1.2:
   version "6.1.11"
