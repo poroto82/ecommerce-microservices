@@ -6,6 +6,6 @@ export default class Stock extends Model {
   idProduct: Number
 
   @Column
-  quantity: Number
+  quantity: number
 
 }

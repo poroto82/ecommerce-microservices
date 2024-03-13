@@ -6,10 +6,10 @@ export class StockRepository extends GenericRepository<Stock> {
       super(Stock);
     }
 
-    public getByProductId(productId: number){
+    public async getByProductId(productId: number): Promise<Stock | null>{
       return Stock.findOne({
         where: {
-          productId: productId
+          idProduct: productId
         }
       })
     }

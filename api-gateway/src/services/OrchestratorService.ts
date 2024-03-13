@@ -10,7 +10,8 @@ export default async function getAllProducts(startIndex: number, endIndex: numbe
 
     // Si no hay datos en caché, obtener productos del servicio
     const products = await fetchProductsFromService(startIndex, endIndex);
-    const enrichedProducts = products.map(enrichProduct);
+    const enrichedProductsPromises = products.map(p => enrichProduct(p));
+    const enrichedProducts = await Promise.all(enrichedProductsPromises);
     
     // Guardar productos en caché para futuras solicitudes
     saveProductsToCache(enrichedProducts);
@@ -31,9 +32,9 @@ async function fetchProductsFromService(startIndex: number, endIndex: number ): 
 }
 
 // Función para enriquecer un producto
-function enrichProduct(product: ProductType): ProductType {
+async function enrichProduct(product: ProductType): Promise<ProductType> {
     // Obtener datos de stock del servicio de stock
-    const stock = getStockForProduct(product);
+    const stock = await getStockForProduct(product);
     
     return {
         ...product,
@@ -43,10 +44,11 @@ function enrichProduct(product: ProductType): ProductType {
 }
 
 // Función para obtener datos de stock para un producto
-function getStockForProduct(product: ProductType): number {
-    product.id 
-    // Implementar lógica para obtener datos de stock del servicio de stock
-    return 3; 
+async function getStockForProduct(product: ProductType): Promise<number> {
+    const response = await fetch(`http://stock-hub:3000/api/${product.id}`);
+    const stockResponse = await response.json()
+    
+    return stockResponse.quantity; 
 }
 
 // Función para guardar productos en caché

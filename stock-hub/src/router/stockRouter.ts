@@ -1,16 +1,21 @@
 import express, { Request, Response } from 'express';
 import StockService from '../services/StockService';
+import { mapStockToDTO } from '../dtos/StockMapper';
 
 const router = express.Router();
 const stockService = new StockService()
 
-router.get('/{productId}', async (req: Request, res: Response) => {
+router.get('/:productId', async (req: Request, res: Response) => {
   try {
-    const stockDb = stockService.getByProductId(parseInt(req.params.productId))
-    res.json(stockDb);
+    const stockDb = await stockService.getByProductId(parseInt(req.params.productId));
+    if (stockDb !== null) {
+      res.json(mapStockToDTO(stockDb));
+    } else {
+      throw new Error('Stock not found');
+    }
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).json({ error: 'Failed to fetch products' });
+    console.error('Error fetching stock:', error);
+    res.status(500).json({ error: 'Failed to fetch stock' });
   }
 });
 
