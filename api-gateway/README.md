@@ -1,0 +1,1 @@
+# The idea on this repo  is to enhance prestashop database model, to get all the  data that they manage, and in the process, try to reconvert from monolith to an microservices architecture. sooo this is the first of many.
