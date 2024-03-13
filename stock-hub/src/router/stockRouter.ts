@@ -10,7 +10,7 @@ router.get('/:productId', async (req: Request, res: Response) => {
   try {
     const stockDb = await stockService.getByProductId(parseInt(req.params.productId));
 
-    const rabbitmqService = new RabbitMQService('amqp://localhost');
+    const rabbitmqService = new RabbitMQService('amqp://rabbitmq');
     rabbitmqService.sendMessage('cola1','mensaej1')
 
     if (stockDb !== null) {
