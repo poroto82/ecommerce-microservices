@@ -1,16 +1,11 @@
 import { ServerApp } from './server'
-import { Database } from './database'
 import Logger from './logger'
 import Config from './config'
 
 (async () => {
 
   try {
-    /**
-     * Connect to the database
-     */
-    await Database.connect()
-
+    
     /**
      * Bootstrap the application here and handle any errors events gracefully.
      */

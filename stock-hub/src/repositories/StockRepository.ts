@@ -1,8 +1,8 @@
-import Supplier from "../models/Stock";
+import Stock from "../models/Stock";
 import { GenericRepository } from "./GenericRepository";
 
-export class SupplierRepository extends GenericRepository<Supplier> {
+export class StockRepository extends GenericRepository<Stock> {
     constructor() {
-      super(Supplier);
+      super(Stock);
     }
   }

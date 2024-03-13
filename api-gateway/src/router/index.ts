@@ -1,9 +1,11 @@
 import { Router } from 'express'
 
 import { HealthcheckRouter } from './healthcheck'
-import {StockRouter } from './stockRouter'
+import {defaultRouter } from './defaultRouter'
 
 export const Routes = Router()
-Routes.use('/stock',StockRouter)
+
+
+Routes.use('/',defaultRouter)
 Routes.use(HealthcheckRouter)
 

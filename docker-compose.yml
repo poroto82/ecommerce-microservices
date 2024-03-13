@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+
+  api-gateway:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./api-gateway:/app
+    ports:
+      - 3003:3000
+    command: sh -c 'yarn install && yarn start'
+  
+  product-hub:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./product-hub:/app
+    command: sh -c 'yarn install && yarn start'
+
+  stock-hub:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./stock-hub:/app
+    command: sh -c 'yarn install && yarn start'
+
+
+  rabbitmq:
+    image: rabbitmq:3.8
+    ports:
+      - "5672:5672"  # Puerto para la comunicación AMQP
+      - "15672:15672"  # Puerto para el panel de control web de RabbitMQ
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "cookie_secreto_aqui"  # Cambia por un valor seguro
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq  # Persistir los datos de RabbitMQ
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"  # Cambia por una contraseña segura
+      MYSQL_DATABASE: "ms"  # Cambia por el nombre de tu base de datos
+      MYSQL_USER: "user"  # Cambia por el nombre de usuario de MySQL
+      MYSQL_PASSWORD: "user"  # Cambia por una contraseña segura
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persistir los datos de MySQL
+
+volumes:
+  rabbitmq_data:
+  mysql_data:

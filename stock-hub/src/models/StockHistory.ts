@@ -1,7 +1,7 @@
 import { Table, Column, Model } from 'sequelize-typescript'
 
 @Table
-export default class Supplier extends Model {
+export default class StockHistory extends Model {
   @Column
   idProduct: Number
 

@@ -1,15 +1,13 @@
-import ProductVariant from "../models/Stock";
+import Stock from "../models/Stock";
 
-export interface ProductVariantDTO {
+export interface StockDto {
   id: number;
-  attribute: string;
-  value: string;
+  quantity: Number;
 }
 
-export function mapProductVariantToDto(productVariant:ProductVariant):ProductVariantDTO{
+export function mapStockToDTO(stock:Stock):StockDto{
   return {
-    id: productVariant.id,
-    attribute: productVariant.id,
-    value: productVariant.value
+    id: stock.id,
+    quantity: stock.quantity
   }
 }
