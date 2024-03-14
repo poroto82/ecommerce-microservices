@@ -6,11 +6,11 @@ export class StockRepository extends GenericRepository<Stock> {
       super(Stock);
     }
 
-    public getByProductId(productId: number): Promise<Stock | null>{
-      return Stock.findOne({
-        where: {
-          idProduct: productId
-        }
-      })
-    }
+    // public getByProductId(productId: number): Promise<Stock | null>{
+    //   return Stock.findOne({
+    //     where: {
+    //       idProduct: productId
+    //     }
+    //   })
+    // }
   }

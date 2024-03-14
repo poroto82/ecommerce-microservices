@@ -7,11 +7,11 @@ export class PriceRepository extends GenericRepository<Price> {
       super(Price);
     }
 
-    public getByProductId(productId: number): Promise<Price | null>{
-      return Price.findOne({
-        where: {
-          idProduct: productId
-        }
-      })
-    }
+    // public getByProductId(productId: number): Promise<Price | null>{
+    //   return Price.findOne({
+    //     where: {
+    //       idProduct: productId
+    //     }
+    //   })
+    // }
   }

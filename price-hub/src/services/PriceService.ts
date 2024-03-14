@@ -11,7 +11,7 @@ export default class PriceService {
     }
 
     public getByProductId(productId: number): Promise<Price | null> {
-        return this.priceRepository.getByProductId(productId);
+        return this.priceRepository.getById(productId);
     }
 
     public async newPrice(productId: number, priceWithouTax: number, tax: number): Promise<Price> {
@@ -21,7 +21,7 @@ export default class PriceService {
     }
 
     public async updatePrice(productId: number, priceWithouTax: number, tax: number, publishQueue = true): Promise<Price> {
-        const price = await this.priceRepository.getByProductId(productId);
+        const price = await this.priceRepository.getById(productId);
         if (price === null) {
             throw new Error('Theres no Price on DB for product ' + productId)
         }
