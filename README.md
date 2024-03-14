@@ -38,12 +38,12 @@ El servicio Price-Hub gestiona los precios de los productos en la plataforma. Es
 Obtención de Precios:
 
 La aplicación consulta el servicio Price-Hub para obtener información actualizada sobre los precios de los productos antes de mostrarlos a los usuarios finales.
-Aplicación de Descuentos y Promociones:
+Aplicación de Descuentos y Promociones: (mmmm maybe new microservice)
 
 Si hay descuentos o promociones activas, la aplicación los aplica automáticamente al precio base del producto antes de mostrarlo al usuario final.
 
-API Gateway
-# ¿Qué hace?
+# API Gateway
+## ¿Qué hace?
 El API Gateway actúa como un punto de entrada para todas las solicitudes de los clientes. Enrutará las solicitudes entrantes a los servicios correspondientes según la lógica de negocio y devolverá las respuestas adecuadas a los clientes.
 
 ## ¿Cómo se usa desde la aplicación?
