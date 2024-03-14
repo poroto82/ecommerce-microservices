@@ -1,5 +1,5 @@
 
 export interface StockDTO {
   idProduct: number;
-  quantity: Number;
+  quantity: number;
 }

@@ -20,7 +20,7 @@ export default class StockService {
         return stockDb;
     }
 
-    public async updateQuantity(productId: number, quantity: number, publishQueue: boolean = true): Promise<Stock> {
+    public async updateQuantity(productId: number, quantity: number, publishQueue = true): Promise<Stock> {
         const stock = await this.stockRepository.getByProductId(productId);
         if (stock === null){
             throw new Error('Theres no stock on DB for product '+productId)

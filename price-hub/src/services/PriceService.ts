@@ -20,7 +20,7 @@ export default class PriceService {
         return priceDb;
     }
 
-    public async updatePrice(productId: number, priceWithouTax: number, tax: number, publishQueue: boolean = true): Promise<Price> {
+    public async updatePrice(productId: number, priceWithouTax: number, tax: number, publishQueue = true): Promise<Price> {
         const price = await this.priceRepository.getByProductId(productId);
         if (price === null) {
             throw new Error('Theres no Price on DB for product ' + productId)

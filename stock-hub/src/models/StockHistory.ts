@@ -3,10 +3,10 @@ import { Table, Column, Model } from 'sequelize-typescript'
 @Table
 export default class StockHistory extends Model {
   @Column
-  idProduct: Number
+  idProduct: number
 
   @Column
-  quantity: Number
+  quantity: number
 
   @Column
   date: Date

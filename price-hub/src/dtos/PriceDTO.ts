@@ -2,6 +2,6 @@
 
 export interface PriceDTO {
   idProduct: number;
-  priceWithTax: Number;
-  priceWithoutTax: Number;
+  priceWithTax: number;
+  priceWithoutTax: number;
 }
