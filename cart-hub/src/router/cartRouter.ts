@@ -1,13 +1,24 @@
 import express, { Request, Response } from 'express';
 import Logger from '../logger'
+import Cart from '../models/Cart';
 
 const router = express.Router();
 
 
-router.post('/', async (_: Request, res: Response) => {
+router.get('/', async (_: Request, res: Response) => {
   try {
     
+    const newProduct = new Cart({
+      idCustomer: 1,
+      products:[{
+        idProduct: 3,
+        quantity: 2,
+        priceUnit: 3
+      }
+      ]
+    });
 
+    await newProduct.save()
     res.json('ok')
 
   } catch (error) {
