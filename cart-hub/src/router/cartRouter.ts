@@ -4,7 +4,7 @@ import Logger from '../logger'
 const router = express.Router();
 
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', async (_: Request, res: Response) => {
   try {
     
 
@@ -18,7 +18,7 @@ router.post('/', async (req: Request, res: Response) => {
 
 
 
-router.get('/:productId', async (req: Request, res: Response) => {
+router.get('/:productId', async (_: Request, res: Response) => {
   try {
     res.json('ok')
   
@@ -30,7 +30,7 @@ router.get('/:productId', async (req: Request, res: Response) => {
 
 
 
-router.patch('/:productId', async (req: Request, res: Response) => {
+router.patch('/:productId', async (_: Request, res: Response) => {
   try {
     res.json('ok')
   

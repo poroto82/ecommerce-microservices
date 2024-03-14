@@ -1,8 +1,9 @@
 import { ServerApp } from './server'
-import { Database } from './database'
+
 import Logger from './logger'
 import Config from './config'
 import RabbitMQService from './services/RabbitMQService'
+import connectDatabase from './database'
 
 (async () => {
 
@@ -11,7 +12,7 @@ import RabbitMQService from './services/RabbitMQService'
     /**
      * Connect to the database
      */
-    await Database.connect()
+    await connectDatabase()
 
     const app = await ServerApp.getInstance()
 

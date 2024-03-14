@@ -1,5 +1,5 @@
 import request from 'supertest'
-import { Database } from '../../database'
+
 import { ServerApp } from '../../server'
 
 const fixedDate = new Date(2020, 3, 1)
@@ -8,7 +8,7 @@ describe('/api/users', () => {
   beforeAll(async () => {
     jest.useFakeTimers('modern')
     jest.setSystemTime(fixedDate)
-    await Database.connect()
+
   })
 
   it('GET /api/users', async () => {

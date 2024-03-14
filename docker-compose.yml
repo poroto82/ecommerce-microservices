@@ -54,6 +54,18 @@ services:
       - mysql
       - rabbitmq
 
+  cart-hub:
+    image: node:18
+    working_dir: /app
+    ports:
+      - 3007:3000
+    volumes:
+      - ./cart-hub:/app
+    restart: on-failure
+    command: sh -c 'yarn install && yarn start'
+    depends_on:
+      - mysql
+      - rabbitmq  
 
   rabbitmq:
     image: rabbitmq:3.8
@@ -75,6 +87,18 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql  # Persistir los datos de MySQL
 
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - mongodb-data:/data/db
+      - ./mongo_init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
 volumes:
   rabbitmq_data:
   mysql_data:
+  mongodb-data:
