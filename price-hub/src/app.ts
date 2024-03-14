@@ -7,12 +7,14 @@ import RabbitMQService from './services/RabbitMQService'
 (async () => {
 
   try {
-
     /**
      * Connect to the database
      */
     await Database.connect()
 
+    /**
+     * Bootstrap the application here and handle any errors events gracefully.
+     */
     const app = await ServerApp.getInstance()
 
     const srv = app.listen(Config.SERVER_PORT)
@@ -27,11 +29,9 @@ import RabbitMQService from './services/RabbitMQService'
     const rabbitMQService = new RabbitMQService('amqp://rabbitmq');
 
     
-    
-    await rabbitMQService.subscribe('stock-queue', (msg) => {
-        //TODO maybe reservation of stock could be done here
-
-      
+    // Suscríbete a la cola deseada
+    await rabbitMQService.subscribe('price-queue', (msg) => {
+        // Aquí puedes manejar los mensajes recibidos de la cola
         if (msg !== null) {
             console.log('Mensaje recibido:', msg.content.toString());
         }

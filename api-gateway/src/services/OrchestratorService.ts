@@ -1,6 +1,6 @@
 import ProductType from "../types/ProductType";
 
-// Función para obtener productos enriquecidos
+
 export default async function getAllProducts(startIndex: number, endIndex: number ): Promise<ProductType[]> {
     // Obtener productos de la caché si están disponibles
     const cachedProducts = getCachedProducts();
@@ -25,7 +25,7 @@ function getCachedProducts(): ProductType[] | null {
     return null; // Devolver null si no hay datos en caché
 }
 
-// Función para obtener productos del servicio de productos
+
 async function fetchProductsFromService(startIndex: number, endIndex: number ): Promise<ProductType[]> {
     const response = await fetch(`http://product-hub:3000/api/products?startIndex=${startIndex}&endIndex=${endIndex}`);
     return await response.json();
@@ -35,15 +35,17 @@ async function fetchProductsFromService(startIndex: number, endIndex: number ): 
 async function enrichProduct(product: ProductType): Promise<ProductType> {
     // Obtener datos de stock del servicio de stock
     const stock = await getStockForProduct(product);
+    const price = await getPriceForProduct(product);
     
     return {
         ...product,
-        stock: stock
-        // Otros enriquecimientos si es necesario
+        stock: stock,
+        priceWithTax: price.priceWithTax,
+        priceWithoutTax: price.priceWithoutTax,
     };
 }
 
-// Función para obtener datos de stock para un producto
+
 async function getStockForProduct(product: ProductType): Promise<number> {
     const response = await fetch(`http://stock-hub:3000/api/${product.id}`);
     const stockResponse = await response.json()
@@ -51,8 +53,16 @@ async function getStockForProduct(product: ProductType): Promise<number> {
     return stockResponse.quantity; 
 }
 
-// Función para guardar productos en caché
+
+async function getPriceForProduct(product: ProductType): Promise<any> {
+    const response = await fetch(`http://price-hub:3000/api/${product.id}`);
+    const priceResponse = await response.json()
+    
+    return priceResponse; 
+}
+
+
 function saveProductsToCache(products: ProductType[]): void {
     products.length
-    // Implementar lógica para guardar productos en caché
+
 }

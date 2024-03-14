@@ -1,16 +1,17 @@
 import express, { Request, Response } from 'express';
-import StockService from '../services/StockService';
-import { mapStockToDTO } from '../mappers/StockMapper';
+
+import { mapPriceToDTO } from '../mappers/PriceMapper';
+import PriceService from '../services/PriceService';
 
 
 const router = express.Router();
-const stockService = new StockService()
+const priceService = new PriceService()
 
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const stockDb = await stockService.newStock(parseInt(req.params.productId),req.body.quantity);
+    const priceDb = await priceService.newPrice(parseInt(req.params.productId),req.body.priceWithouTax, req.body.tax);
 
-    res.json(mapStockToDTO(stockDb));
+    res.json(mapPriceToDTO(priceDb));
 
   } catch (error) {
     console.error('Error fetching stock:', error);
@@ -22,9 +23,9 @@ router.post('/', async (req: Request, res: Response) => {
 
 router.get('/:productId', async (req: Request, res: Response) => {
   try {
-    const stockDb = await stockService.getByProductId(parseInt(req.params.productId));
-    if (stockDb)
-      res.json(mapStockToDTO(stockDb));
+    const priceDb = await priceService.getByProductId(parseInt(req.params.productId));
+    if (priceDb)
+      res.json(mapPriceToDTO(priceDb));
     else
       res.status(400).json();
   
@@ -38,8 +39,8 @@ router.get('/:productId', async (req: Request, res: Response) => {
 
 router.patch('/:productId', async (req: Request, res: Response) => {
   try {
-    const stockDb = await stockService.updateQuantity(parseInt(req.params.productId),req.body.quantity);
-    res.json(mapStockToDTO(stockDb));
+    const priceDb = await priceService.updatePrice(parseInt(req.params.productId),req.body.priceWithouTax, req.body.tax);
+    res.json(mapPriceToDTO(priceDb));
   
   } catch (error) {
     console.error('Error fetching stock:', error);

@@ -3,6 +3,8 @@ interface ProductType {
     name: string;
     description: string;
     stock?: number;
+    priceWithTax: number,
+    priceWithoutTax: number
 }
 
 export default ProductType;

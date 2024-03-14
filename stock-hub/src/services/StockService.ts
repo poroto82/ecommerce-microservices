@@ -2,7 +2,6 @@ import Stock from "../models/Stock";
 import { StockRepository } from "../repositories/StockRepository";
 import RabbitMQService from "./RabbitMQService";
 
-
 export default class StockService {
 
     private stockRepository: StockRepository;

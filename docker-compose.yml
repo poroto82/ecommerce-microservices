@@ -41,24 +41,37 @@ services:
       - mysql
       - rabbitmq
 
+  price-hub:
+    image: node:18
+    working_dir: /app
+    ports:
+      - 3006:3000
+    volumes:
+      - ./price-hub:/app
+    restart: on-failure
+    command: sh -c 'yarn install && yarn start'
+    depends_on:
+      - mysql
+      - rabbitmq
+
 
   rabbitmq:
     image: rabbitmq:3.8
     ports:
-      - "5672:5672"  # Puerto para la comunicación AMQP
-      - "15672:15672"  # Puerto para el panel de control web de RabbitMQ
+      - "5672:5672"
+      - "15672:15672"
     volumes:
-      - rabbitmq_data:/var/lib/rabbitmq  # Persistir los datos de RabbitMQ
+      - rabbitmq_data:/var/lib/rabbitmq 
 
   mysql:
     image: mysql:latest
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "root"  # Cambia por una contraseña segura
-      MYSQL_DATABASE: "ms"  # Cambia por el nombre de tu base de datos
-      MYSQL_USER: "user"  # Cambia por el nombre de usuario de MySQL
-      MYSQL_PASSWORD: "user"  # Cambia por una contraseña segura
+      MYSQL_ROOT_PASSWORD: "root" 
+      MYSQL_DATABASE: "ms"
+      MYSQL_USER: "user" 
+      MYSQL_PASSWORD: "user"
     volumes:
       - mysql_data:/var/lib/mysql  # Persistir los datos de MySQL
 
