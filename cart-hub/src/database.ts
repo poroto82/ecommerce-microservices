@@ -2,11 +2,10 @@ import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
 import { Models } from './models'
 import Config from './config'
 
-
 export class Database {
   public static async connect(): Promise<Sequelize> {
     
-    
+    console.log(Config)
     
     const options: SequelizeOptions = {
       models: Models,

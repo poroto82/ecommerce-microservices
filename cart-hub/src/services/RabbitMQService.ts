@@ -1,5 +1,4 @@
 import amqp, { Channel, Connection, Message } from 'amqplib';
-import Logger from '../logger'
 
 class RabbitMQService {
     private connection: Connection | null = null;
@@ -19,12 +18,24 @@ class RabbitMQService {
         try {
             await this.channel.assertQueue(queue);
             await this.channel.sendToQueue(queue, Buffer.from(message));
-            Logger.info(`Message sent to queue ${queue}: ${message}`);
+            console.log(`Message sent to queue ${queue}: ${message}`);
         } catch (error) {
-            Logger.error(`Error sending message to queue ${queue}:`, error);
+            console.error(`Error sending message to queue ${queue}:`, error);
             throw error;
         }
     }
+
+    private async connect(): Promise<void> {
+        try {
+            this.connection = await amqp.connect(this.uri);
+            this.channel = await this.connection.createChannel();
+            console.log('Connected to RabbitMQ');
+        } catch (error) {
+            console.error('Error connecting to RabbitMQ:', error);
+            throw error;
+        }
+    }
+
 
     async subscribe(queue: string, callback: (msg: Message | null) => void): Promise<void> {
         if (!this.connection) {
@@ -38,20 +49,9 @@ class RabbitMQService {
         try {
             await this.channel.assertQueue(queue);
             await this.channel.consume(queue, callback, { noAck: true });
-            Logger.info(`Subscribed to queue ${queue}`);
+            console.log(`Subscribed to queue ${queue}`);
         } catch (error) {
-            Logger.error(`Error subscribing to queue ${queue}:`, error);
-            throw error;
-        }
-    }
-
-    private async connect(): Promise<void> {
-        try {
-            this.connection = await amqp.connect(this.uri);
-            this.channel = await this.connection.createChannel();
-            Logger.info('Connected to RabbitMQ');
-        } catch (error) {
-            Logger.error('Error connecting to RabbitMQ:', error);
+            console.error(`Error subscribing to queue ${queue}:`, error);
             throw error;
         }
     }
@@ -59,7 +59,7 @@ class RabbitMQService {
     async close(): Promise<void> {
         if (this.connection) {
             await this.connection.close();
-            Logger.info('Disconnected from RabbitMQ');
+            console.log('Disconnected from RabbitMQ');
         }
     }
 }

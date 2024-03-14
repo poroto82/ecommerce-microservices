@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-
+import Logger from '../logger'
 import { mapPriceToDTO } from '../mappers/PriceMapper';
 import PriceService from '../services/PriceService';
 
@@ -14,8 +14,8 @@ router.post('/', async (req: Request, res: Response) => {
     res.json(mapPriceToDTO(priceDb));
 
   } catch (error) {
-    console.error('Error fetching stock:', error);
-    res.status(500).json({ error: 'Failed to fetch stock' });
+    Logger.error('Error fetching price:', error);
+    res.status(500).json({ error: 'Failed to fetch price' });
   }
 });
 
@@ -30,8 +30,8 @@ router.get('/:productId', async (req: Request, res: Response) => {
       res.status(400).json();
   
   } catch (error) {
-    console.error('Error fetching stock:', error);
-    res.status(500).json({ error: 'Failed to fetch stock' });
+    Logger.error('Error fetching price:', error);
+    res.status(500).json({ error: 'Failed to fetch price' });
   }
 });
 
@@ -43,10 +43,10 @@ router.patch('/:productId', async (req: Request, res: Response) => {
     res.json(mapPriceToDTO(priceDb));
   
   } catch (error) {
-    console.error('Error fetching stock:', error);
-    res.status(500).json({ error: 'Failed to fetch stock' });
+    Logger.error('Error fetching price:', error);
+    res.status(500).json({ error: 'Failed to fetch price' });
   }
 });
 
-export const StockRouter = router
+export const PriceRouter = router
 

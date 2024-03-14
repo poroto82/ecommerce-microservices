@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import StockService from '../services/StockService';
 import { mapStockToDTO } from '../mappers/StockMapper';
-import Logger from '../logger'
+
 
 const router = express.Router();
 const stockService = new StockService()
@@ -13,7 +13,7 @@ router.post('/', async (req: Request, res: Response) => {
     res.json(mapStockToDTO(stockDb));
 
   } catch (error) {
-    Logger.error('Error fetching stock:', error);
+    console.error('Error fetching stock:', error);
     res.status(500).json({ error: 'Failed to fetch stock' });
   }
 });
@@ -29,7 +29,7 @@ router.get('/:productId', async (req: Request, res: Response) => {
       res.status(400).json();
   
   } catch (error) {
-    Logger.error('Error fetching stock:', error);
+    console.error('Error fetching stock:', error);
     res.status(500).json({ error: 'Failed to fetch stock' });
   }
 });
@@ -42,7 +42,7 @@ router.patch('/:productId', async (req: Request, res: Response) => {
     res.json(mapStockToDTO(stockDb));
   
   } catch (error) {
-    Logger.error('Error fetching stock:', error);
+    console.error('Error fetching stock:', error);
     res.status(500).json({ error: 'Failed to fetch stock' });
   }
 });

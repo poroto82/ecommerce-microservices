@@ -1,5 +1,5 @@
 import amqp, { Channel, Connection, Message } from 'amqplib';
-
+import Logger from '../logger'
 class RabbitMQService {
     private connection: Connection | null = null;
     private channel: Channel | null = null;
@@ -18,9 +18,9 @@ class RabbitMQService {
         try {
             await this.channel.assertQueue(queue);
             await this.channel.sendToQueue(queue, Buffer.from(message));
-            console.log(`Message sent to queue ${queue}: ${message}`);
+            Logger.info(`Message sent to queue ${queue}: ${message}`);
         } catch (error) {
-            console.error(`Error sending message to queue ${queue}:`, error);
+            Logger.error(`Error sending message to queue ${queue}:`, error);
             throw error;
         }
     }
@@ -29,9 +29,9 @@ class RabbitMQService {
         try {
             this.connection = await amqp.connect(this.uri);
             this.channel = await this.connection.createChannel();
-            console.log('Connected to RabbitMQ');
+            Logger.info('Connected to RabbitMQ');
         } catch (error) {
-            console.error('Error connecting to RabbitMQ:', error);
+            Logger.error('Error connecting to RabbitMQ:', error);
             throw error;
         }
     }
@@ -49,9 +49,9 @@ class RabbitMQService {
         try {
             await this.channel.assertQueue(queue);
             await this.channel.consume(queue, callback, { noAck: true });
-            console.log(`Subscribed to queue ${queue}`);
+            Logger.info(`Subscribed to queue ${queue}`);
         } catch (error) {
-            console.error(`Error subscribing to queue ${queue}:`, error);
+            Logger.error(`Error subscribing to queue ${queue}:`, error);
             throw error;
         }
     }
@@ -59,7 +59,7 @@ class RabbitMQService {
     async close(): Promise<void> {
         if (this.connection) {
             await this.connection.close();
-            console.log('Disconnected from RabbitMQ');
+            Logger.info('Disconnected from RabbitMQ');
         }
     }
 }

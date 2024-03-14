@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import ProductService from '../services/ProductService';
 import { mapProductToDto } from '../dtos/ProductMapper';
-
+import Logger from '../logger'
 const router = express.Router();
 const productService = new ProductService();
 
@@ -12,7 +12,7 @@ router.get('/', async (_: Request, res: Response) => {
 
     res.json(productDTOs);
   } catch (error) {
-    console.error('Error fetching products:', error);
+    Logger.error('Error fetching products:', error);
     res.status(500).json({ error: 'Failed to fetch products' });
   }
 });
@@ -28,7 +28,7 @@ router.get('/:id', async (req: Request, res: Response) => {
       res.status(404).json({ error: 'Product not found' });
     }
   } catch (error) {
-    console.error('Error fetching product:', error);
+    Logger.error('Error fetching product:', error);
     res.status(500).json({ error: 'Failed to fetch product' });
   }
 });
@@ -40,7 +40,7 @@ router.post('/', async (req: Request, res: Response) => {
     const productDTO = mapProductToDto(createdProduct);
     res.status(201).json(productDTO);
   } catch (error) {
-    console.error('Error creating product:', error);
+    Logger.error('Error creating product:', error);
     res.status(500).json({ error: 'Failed to create product' });
   }
 })

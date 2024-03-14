@@ -4,6 +4,7 @@ import Logger from './logger'
 import Config from './config'
 import RabbitMQService from './services/RabbitMQService'
 
+
 (async () => {
 
   try {
@@ -33,7 +34,7 @@ import RabbitMQService from './services/RabbitMQService'
 
       
         if (msg !== null) {
-            console.log('Mensaje recibido:', msg.content.toString());
+          Logger.info('Mensaje recibido:', msg.content.toString());
         }
     });
 

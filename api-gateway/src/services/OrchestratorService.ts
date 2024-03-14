@@ -1,6 +1,5 @@
 import ProductType from "../types/ProductType";
 
-
 export default async function getAllProducts(startIndex: number, endIndex: number ): Promise<ProductType[]> {
     // Obtener productos de la caché si están disponibles
     const cachedProducts = getCachedProducts();
