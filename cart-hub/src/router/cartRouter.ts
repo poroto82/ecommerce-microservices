@@ -9,7 +9,7 @@ router.get('/', async (_: Request, res: Response) => {
   try {
     
     const newProduct = new Cart({
-      idCustomer: 1,
+      idCustomer: 2,
       products:[{
         idProduct: 3,
         quantity: 2,

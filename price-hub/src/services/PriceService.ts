@@ -29,6 +29,7 @@ export default class PriceService {
         price.priceWithTax = this.priceWithTax(priceWithouTax, tax)
         price.save()
 
+        //Publish and save history?
         if (publishQueue) {
             const rabbitmqService = new RabbitMQService('amqp://rabbitmq');
             rabbitmqService.sendMessage('PRICEUPDATE', JSON.stringify((price)))

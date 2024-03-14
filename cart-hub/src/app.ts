@@ -27,10 +27,7 @@ import connectDatabase from './database'
 
     const rabbitMQService = new RabbitMQService('amqp://rabbitmq');
 
-    
-    
     await rabbitMQService.subscribe('cart-queue', (msg) => {
-
       
         if (msg !== null) {
             Logger.info('Mensaje recibido:', msg.content.toString());
