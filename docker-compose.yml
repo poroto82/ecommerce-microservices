@@ -10,6 +10,7 @@ services:
     ports:
       - 3003:3000
     command: sh -c 'yarn install && yarn start'
+    restart: on-failure
     depends_on:
       - product-hub
       - stock-hub
@@ -21,9 +22,11 @@ services:
       - 3004:3000
     volumes:
       - ./product-hub:/app
+    restart: on-failure
     command: sh -c 'yarn install && yarn start'
     depends_on:
       - mysql
+      - rabbitmq
 
   stock-hub:
     image: node:18
@@ -32,9 +35,11 @@ services:
       - 3005:3000
     volumes:
       - ./stock-hub:/app
+    restart: on-failure
     command: sh -c 'yarn install && yarn start'
     depends_on:
       - mysql
+      - rabbitmq
 
 
   rabbitmq:
@@ -42,8 +47,6 @@ services:
     ports:
       - "5672:5672"  # Puerto para la comunicación AMQP
       - "15672:15672"  # Puerto para el panel de control web de RabbitMQ
-    environment:
-      RABBITMQ_ERLANG_COOKIE: "cookie_secreto_aqui"  # Cambia por un valor seguro
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq  # Persistir los datos de RabbitMQ
 

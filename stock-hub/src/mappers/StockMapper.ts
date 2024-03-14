@@ -1,14 +1,14 @@
 import Stock from "../models/Stock";
 
 export interface StockDTO {
-    id: number;
+    idProduct: number;
     quantity: number;
 
 }
 
 export function mapStockToDto(stock: Stock): StockDTO {
     return {
-        id: stock.id ,
+        idProduct: stock.idProduct ,
         quantity: stock.quantity
     };
 }

@@ -1,4 +1,4 @@
-import amqp, { Channel, Connection } from 'amqplib';
+import amqp, { Channel, Connection, Message } from 'amqplib';
 
 class RabbitMQService {
     private connection: Connection | null = null;
@@ -25,24 +25,24 @@ class RabbitMQService {
         }
     }
 
-    // async subscribe(queue: string, callback: (message: Message) => void): Promise<void> {
-    //     if (!this.connection) {
-    //         await this.connect();
-    //     }
-
-    //     if (!this.channel) {
-    //         throw new Error('RabbitMQ channel not initialized');
-    //     }
-
-    //     try {
-    //         await this.channel.assertQueue(queue);
-    //         await this.channel.consume(queue, callback, { noAck: true });
-    //         console.log(`Subscribed to queue ${queue}`);
-    //     } catch (error) {
-    //         console.error(`Error subscribing to queue ${queue}:`, error);
-    //         throw error;
-    //     }
-    // }
+    async subscribe(queue: string, callback: (msg: Message | null) => void): Promise<void> {
+        if (!this.connection) {
+            await this.connect();
+        }
+    
+        if (!this.channel) {
+            throw new Error('RabbitMQ channel not initialized');
+        }
+    
+        try {
+            await this.channel.assertQueue(queue);
+            await this.channel.consume(queue, callback, { noAck: true });
+            console.log(`Subscribed to queue ${queue}`);
+        } catch (error) {
+            console.error(`Error subscribing to queue ${queue}:`, error);
+            throw error;
+        }
+    }
 
     private async connect(): Promise<void> {
         try {

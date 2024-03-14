@@ -9,6 +9,7 @@ router.get('/', async (_: Request, res: Response) => {
   try {
     const products = await productService.getAllProducts();
     const productDTOs = products.map((product) => mapProductToDto(product));
+
     res.json(productDTOs);
   } catch (error) {
     console.error('Error fetching products:', error);

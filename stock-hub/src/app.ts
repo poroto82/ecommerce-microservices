@@ -2,6 +2,7 @@ import { ServerApp } from './server'
 import { Database } from './database'
 import Logger from './logger'
 import Config from './config'
+import RabbitMQService from './services/RabbitMQService'
 
 (async () => {
 
@@ -24,6 +25,17 @@ import Config from './config'
     srv.on('error', (error) => {
       Logger.error(error.message)
     })
+
+    const rabbitMQService = new RabbitMQService('amqp://rabbitmq');
+
+    
+    // Suscríbete a la cola deseada
+    await rabbitMQService.subscribe('stock-queue', (msg) => {
+        // Aquí puedes manejar los mensajes recibidos de la cola
+        if (msg !== null) {
+            console.log('Mensaje recibido:', msg.content.toString());
+        }
+    });
 
   } catch (err) {
     Logger.error(err)

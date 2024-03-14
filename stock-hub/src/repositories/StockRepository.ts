@@ -6,7 +6,7 @@ export class StockRepository extends GenericRepository<Stock> {
       super(Stock);
     }
 
-    public async getByProductId(productId: number): Promise<Stock | null>{
+    public getByProductId(productId: number): Promise<Stock | null>{
       return Stock.findOne({
         where: {
           idProduct: productId
