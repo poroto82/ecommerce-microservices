@@ -1,8 +1,5 @@
-import Stock from "./Stock";
-import StockHistory from "./StockHistory";
-
+import Cart from "./Cart";
 
 export const Models = [
-  Stock,
-  StockHistory
+  Cart
 ]

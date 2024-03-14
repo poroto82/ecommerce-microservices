@@ -1,7 +1,7 @@
 import { Table, Column, Model, PrimaryKey, DataType } from 'sequelize-typescript'
 
 @Table
-export default class Stock extends Model {
+export default class Cart extends Model {
   @PrimaryKey
   @Column(DataType.INTEGER)
   idProduct: number

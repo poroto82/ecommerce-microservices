@@ -28,12 +28,11 @@ import RabbitMQService from './services/RabbitMQService'
 
     
     
-    await rabbitMQService.subscribe('stock-queue', (msg) => {
-        //TODO maybe reservation of stock could be done here
+    await rabbitMQService.subscribe('cart-queue', (msg) => {
 
       
         if (msg !== null) {
-            console.log('Mensaje recibido:', msg.content.toString());
+            Logger.info('Mensaje recibido:', msg.content.toString());
         }
     });
 

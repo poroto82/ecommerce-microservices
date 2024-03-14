@@ -1,5 +1,5 @@
 
-export interface StockDTO {
+export interface CartDTO {
   idProduct: number;
   quantity: number;
 }
