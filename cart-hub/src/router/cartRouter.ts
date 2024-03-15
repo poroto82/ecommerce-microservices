@@ -1,28 +1,20 @@
 import express, { Request, Response } from 'express';
 import Logger from '../logger'
-import Cart from '../models/Cart';
+import CartService from '../services/CartService';
+import { mapCartToDTO, mapDTOToDomain } from '../mappers/CartMapper';
+import { CartDTO } from '../dtos/CartDTO';
+import { validateDto } from '../middleware/validation';
 
 const router = express.Router();
+const cartService = new CartService()
 
-
-router.get('/', async (_: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
-    
-    const newProduct = new Cart({
-      idCustomer: 2,
-      products:[{
-        idProduct: 3,
-        quantity: 2,
-        priceUnit: 3
-      }
-      ]
-    });
-
-    await newProduct.save()
-    res.json('ok')
+    const cart = await cartService.saveCart(req.body)
+    res.json(mapCartToDTO(cart))
 
   } catch (error) {
-    Logger.error('Error fetching cart:', error);
+    Logger.error('Error fetching cart:', JSON.stringify(error));
     res.status(500).json({ error: 'Failed to fetch cart' });
   }
 });
@@ -39,6 +31,17 @@ router.get('/:productId', async (_: Request, res: Response) => {
   }
 });
 
+
+router.post('/', validateDto(CartDTO), async (req: Request, res: Response) => {
+  try {
+    const cart = await cartService.saveCart(mapDTOToDomain(req.body))
+    res.json(mapCartToDTO(cart))
+  
+  } catch (error) {
+    Logger.error('Error fetching cart:', JSON.stringify(error));
+    res.status(500).json({ error: 'Failed to save cart' });
+  }
+});
 
 
 router.patch('/:productId', async (_: Request, res: Response) => {

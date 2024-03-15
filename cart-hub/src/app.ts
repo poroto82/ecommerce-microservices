@@ -14,7 +14,9 @@ import connectDatabase from './database'
      */
     await connectDatabase()
 
+
     const app = await ServerApp.getInstance()
+    
 
     const srv = app.listen(Config.SERVER_PORT)
 
