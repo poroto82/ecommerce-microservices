@@ -2,11 +2,13 @@ import express, { Request, Response } from 'express';
 import StockService from '../services/StockService';
 import { mapStockToDTO } from '../mappers/StockMapper';
 import Logger from '../logger'
+import { validateDto } from '../middleware/validation';
+import { StockDTO } from '../dtos/StockDTO';
 
 const router = express.Router();
 const stockService = new StockService()
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', validateDto(StockDTO), async (req: Request, res: Response) => {
   try {
     const stockDb = await stockService.newStock(parseInt(req.params.productId),req.body.quantity);
 

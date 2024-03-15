@@ -1,5 +1,8 @@
+import { IsNumber } from "class-validator";
 
-export interface StockDTO {
+export class  StockDTO {
   idProduct: number;
+  
+  @IsNumber()
   quantity: number;
 }
