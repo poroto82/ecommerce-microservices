@@ -19,8 +19,8 @@ export const CartRepository = {
     },
 
     // Actualiza un carrito en la base de datos
-    async updateCart(cartId: string, updatedCart: Partial<Cart>): Promise<Cart | null> {
-        return await CartModel.findByIdAndUpdate(cartId, updatedCart, { new: true }).exec();
+    async updateCart(updatedCart: Cart): Promise<Cart> {
+        return await CartModel.findByIdAndUpdate(updatedCart.id, updatedCart, { new: true }).exec();
     },
 
     // Elimina un carrito de la base de datos

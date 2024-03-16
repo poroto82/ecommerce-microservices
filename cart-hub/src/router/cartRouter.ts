@@ -8,10 +8,13 @@ import { validateDto } from '../middleware/validation';
 const router = express.Router();
 const cartService = new CartService()
 
-router.get('/', async (req: Request, res: Response) => {
+router.get('/:cartId', async (req: Request, res: Response) => {
   try {
-    const cart = await cartService.saveCart(req.body)
-    res.json(mapCartToDTO(cart))
+    const cart = await cartService.getCart(req.params.cartId)
+    if (cart === null)
+      res.json('cart not found',404)
+    else
+      res.json(mapCartToDTO(cart))
 
   } catch (error) {
     Logger.error('Error fetching cart:', JSON.stringify(error));
@@ -19,18 +22,19 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-
-
-router.get('/:productId', async (_: Request, res: Response) => {
+router.put('/:cartId', async (req: Request, res: Response) => {
   try {
-    res.json('ok')
-  
+    const cart = await cartService.saveCart(mapDTOToDomain(req.body))
+    if (cart === null)
+      res.json('cart not found',404)
+    else
+      res.json(mapCartToDTO(cart))
+
   } catch (error) {
-    Logger.error('Error fetching cart:', error);
+    Logger.error('Error fetching cart:', JSON.stringify(error));
     res.status(500).json({ error: 'Failed to fetch cart' });
   }
 });
-
 
 router.post('/', validateDto(CartDTO), async (req: Request, res: Response) => {
   try {
@@ -43,16 +47,6 @@ router.post('/', validateDto(CartDTO), async (req: Request, res: Response) => {
   }
 });
 
-
-router.patch('/:productId', async (_: Request, res: Response) => {
-  try {
-    res.json('ok')
-  
-  } catch (error) {
-    Logger.error('Error fetching cart:', error);
-    res.status(500).json({ error: 'Failed to fetch cart' });
-  }
-});
 
 export const CartRouter = router
 

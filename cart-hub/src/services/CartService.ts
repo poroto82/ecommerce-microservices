@@ -5,7 +5,15 @@ import { CartRepository } from "../repositories/CartRepository";
 export default class CartService {
 
     async saveCart(cart: Cart): Promise<Cart>{
-
-       return await CartRepository.createCart(cart)
+        if (cart.id !== null)
+            return await CartRepository.updateCart(cart)
+        else
+            return await CartRepository.createCart(cart)
     }
+
+    async getCart(cartId: string): Promise<Cart | null>{
+        return await CartRepository.getCartById(cartId)
+    }
+
+    
 }
