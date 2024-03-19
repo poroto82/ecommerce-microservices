@@ -8,6 +8,7 @@ import {
 
 import { FloatButton } from "antd";
 import { ProductsTable } from "../components/ProductsTable/ProductsTable";
+import { Link } from "react-router-dom";
 
 
 export const ProductsPage = () => {

@@ -1,12 +1,9 @@
 import React from 'react';
-import { Form, Input, InputNumber, Button, Select, Upload, Tabs } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Form, Button, Tabs } from 'antd';
 import BasicProductForm from '../components/ProductForm/BasicProductForm';
 import CombinationProductForm from '../components/ProductForm/CombinationProductForm';
 import PriceProductForm from '../components/ProductForm/PriceProductForm';
 import SeoProductForm from '../components/ProductForm/SeoProductForm';
-
-const { Option } = Select;
 
 const ProductFormPage = () => {
     const onFinish = (values) => {

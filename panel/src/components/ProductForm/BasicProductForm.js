@@ -1,11 +1,53 @@
 import React from 'react';
-import { Form, Input, InputNumber, Button, Select, Upload, Tabs } from 'antd';
+import { Form, Input, InputNumber, Button, Select, Upload, Cascader  } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
-const BasicProductForm = () => {
+const options = [
+    {
+      value: 'inicio',
+      label: 'inicio',
+      children: [
+        {
+          value: 'electronica',
+          label: 'electronica',
+          children: [
+            {
+              value: 'radios',
+              label: 'radios',
+            },
+            {
+              value: 'tvs',
+              label: 'tvs',
+              disabled: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      value: 'moda',
+      label: 'moda',
+      children: [
+        {
+          value: 'vestidos',
+          label: 'vestidos',
+          children: [
+            {
+              value: 'floreados',
+              label: 'floreados',
+            },
+          ],
+        },
+      ],
+    },
+  ];
 
+const BasicProductForm = () => {
+    
+    const filter = (inputValue, path) =>
+        path.some((option) => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
 
     return (
         <>
@@ -45,12 +87,14 @@ const BasicProductForm = () => {
                 name="category"
                 rules={[{ required: true, message: 'Por favor selecciona la categoría' }]}
             >
-                <Select placeholder="Selecciona la categoría">
-                    <Option value="electronica">Electrónica</Option>
-                    <Option value="ropa">Ropa</Option>
-                    <Option value="hogar">Hogar</Option>
-                    {/* Agrega más opciones de categoría según sea necesario */}
-                </Select>
+                <Cascader
+                    options={options}
+                    placeholder="Please select"
+                    showSearch={{
+                    filter,
+                    }}
+                    onSearch={(value) => console.log(value)}
+                />
             </Form.Item>
 
             <Form.Item

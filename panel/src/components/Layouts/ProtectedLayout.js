@@ -1,10 +1,10 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import React, { useState } from 'react';
 //import { useAuth } from '../../hooks/useAuth';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { SideMenu } from "../SideMenu/SideMenu";
 
-const { Header, Content, Footer } = Layout;
+const {  Content, Footer } = Layout;
 
 export function ProtectedLayout() {
 

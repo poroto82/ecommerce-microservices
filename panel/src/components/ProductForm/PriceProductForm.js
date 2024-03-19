@@ -1,15 +1,9 @@
 import React from 'react';
-import { Form, Input, InputNumber, Button, Select, Upload, Tabs } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-
-const { Option } = Select;
+import { Form, Input,  Select} from 'antd';
 
 const PriceProductForm = () => {
-
-
     return (
         <>
-
             <Form.Item
                 label="Precio unitario del Producto"
                 name="unitPrice"
@@ -31,8 +25,6 @@ const PriceProductForm = () => {
            >
                 <Input />
             </Form.Item>
-
-
         </>
     );
 };
