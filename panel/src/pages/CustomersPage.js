@@ -8,15 +8,16 @@ import {
 
 import { FloatButton } from "antd";
 import { ProductsTable } from "../components/ProductsTable/ProductsTable";
+import { CustomersTable } from "../components/CustomersTable/CustomersTable";
 
 
-export const ProductsPage = () => {
+export const CustomersPage = () => {
 
-    const [products, setProducts] = useState([])
+    const [customers, setCustomers] = useState([])
 
     return (
         <div>
-            <ProductsTable products={products}></ProductsTable>
+            <CustomersTable customers={customers}></CustomersTable>
             
             <FloatButton
                 icon={<PlusOutlined />}

@@ -4,6 +4,9 @@ import './App.css';
 import LoginPage from './pages/LoginPage.js';
 import DashboardPage from './pages/DashboardPage.js';
 import { ProtectedLayout } from './components/Layouts/ProtectedLayout.js';
+
+import ProductFormPage from './pages/ProductFormPage.js';
+import { CustomersTable } from './components/CustomersTable/CustomersTable.js';
 import { ProductsPage } from './pages/ProductsPage.js';
 
 function App() {
@@ -17,6 +20,8 @@ function App() {
         <Route path='/' element={<ProtectedLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/new" element={<ProductFormPage />} />
+          <Route path="/customers" element={<CustomersTable />} />
         </Route>
 
         {/* <Route path="/register" element={<RegisterPage />} /> */}
